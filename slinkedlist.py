@@ -309,8 +309,24 @@ class SLinkedList:
             raise ValueError(f'data {data} not found')
 
     def remove_at_start(self):
+        """
+        Role:
+            Removes the first node (the head) in the linked list.
+        Time complexity O(1):
+            We remove the head and make the next node is the new head.
+        Returns:
+             Nothing.
+        """
         self.head = self.head.next
     def remove_at_end(self):
+        """
+        Role:
+            Removes the last data in the linked list.
+        Time complexity of O(n):
+            It requires traversing the entire list to find the last node and remove it.
+        Returns:
+            Nothing
+        """
         current = self.head
         before_end = None
         while current.next:
@@ -319,23 +335,45 @@ class SLinkedList:
         before_end.next = None
 
     def reverse_in_place(self):
+        """
+        Role:
+            Reverse the original linkedlist.
+        Time complexity of O(n):
+            It requires traversing the entire linkedlist, for each node it makes
+            the previous node the new next node
+        Returns:
+            The reversed linkedlist.
+        """
         current = self.head
-        # head = current
         prev = None
         while current:
+            # we save the next node before we change it.
             head = current.next
             current.next = prev
             prev = current
+            # we store the saved node in the current variable to keep
+            # the flow of nodes clean and correct.
             current = head
         self.head = prev
+        print(self)
 
     def new_reversed_list(self):
+        """
+        Role:
+            Create another linkedlist to store the reverse of the linkedlist.
+            The original linked list stays unchanged.
+        Time complexity of O(n):
+            It requires traversing the entire linkedlist, each time we add a node to
+            the new linkedlist.
+        Returns:
+            The reversed linkedlist.
+        """
         reverse_list = SLinkedList()
         current = self.head
         while current:
             reverse_list.add_node(current.data)
             current = current.next
-        return reverse_list
+        print(reverse_list)
 
     def __repr__(self):
         """
